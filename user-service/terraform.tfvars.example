@@ -1,0 +1,29 @@
+# Copy this file to terraform.tfvars and fill in the values before running apply.
+
+aws_region  = "us-east-1"
+environment = "dev"
+
+# Architecture context (do not change — matches project/org IDs)
+project_id = "4fb4b4a8-b925-4acd-9a7e-d7b9d3373134"
+org_id     = "95bd4e80-e002-4fe5-ab71-fa85aad9fec8"
+
+# IAM role ARN for the User Service ECS/EKS task
+user_service_role_arn = "arn:aws:iam::123456789012:role/shopping-app-user-service-task-role"
+
+# Optional — IAM roles that need read-only bucket access (audit, analytics, etc.)
+additional_reader_role_arns = [
+  # "arn:aws:iam::123456789012:role/shopping-app-audit-role",
+]
+
+# Optional — IAM users/roles that can administer the KMS key
+kms_key_administrators = [
+  # "arn:aws:iam::123456789012:role/platform-kms-admin",
+]
+
+# Lifecycle settings (tune per environment)
+noncurrent_version_expiration_days = 90
+transition_ia_days                 = 30
+transition_glacier_days            = 90
+expiration_days                    = 0   # 0 = never delete current versions
+abort_incomplete_multipart_days    = 7
+kms_deletion_window_days           = 30
